@@ -1,17 +1,42 @@
 <!Doctype html>
+<!--If you edit this file while your app is running, it will crash and take two restarts before working again-->
 <html>
     <head>
         <title>Test page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8; text/javascript; module; cm-line;">
+        <!--<meta http-equiv="Content-type" content="text/html; charset=utf-8; text/javascript; module; cm-line;">-->
         <meta http-equiv="Permissions-Policy" content="interest-cohort=(), user-id=()" />
-        <style>body {background-color: black;} h1 {color: white;}</style>
+        <style>
+            body {
+                background-color: black;
+            } 
+            h1 {
+                color: white;
+            } 
+            h2 {
+                color: white;
+            }
+            img {
+                object-fit: contain;
+            }
+            img[src="ELedlow-the-fox.txt"] {
+                height:600px;
+                width:600px;
+                object-fit: contain;
+            }
+        </style>
     </head>
     <body>
         <h1>Test page</h1>
+        <h2>Test image:</h2>
+        <!--Due to a new update to Swift Playgrounds Security, using images from the Assets folder does not work.-->
+        <!--You have to use a txt file instead. You can make the type "png:base64" in order to load your image as the html will recognize it as the image, but that is only neccessary for if it doesn't recognize it-->
+        <!--One problem with image rendering on swift playgrounds is the fact that resising doesn't work-->
+        <img src="ELedlow-the-fox.txt" type="png:base64"alt="ELedlow the fox in the endless forest" onerror="alert('ELedlow the fox.png failed to load')">
     </body>
-    <script type="text/javascript" onerror="alert('Testing async text/javascript failed')">alert("Testing text/javascript successful")</script>
-    <script type="module" onerror="alert('Testing deferred module failed')">alert("Testing module successful")</script>
-    <script type="module" onerror="alert('Testing prompt module failed')">prompt("Put anything here. This is a test prompt.")</script>
-    <script type="module" onerror="alert('Testing confirmation module failed')">confirm("Click ok or cancel")</script>
+    <script type="text/javascript" onerror="alert('Testing text/javascript failed')">alert("Testing text/javascript successful")</script>
+    <script type="module" onerror="alert('Testing module failed')">alert("Testing module successful")</script>
+    <script type="module" onerror="alert('Testing prompt module failed')">prompt("Testing prompt module successful")</script>
+    <script type="module" onerror="alert('Testing confirmation module failed')">confirm("Testing Confirmation module successful")</script>
+    <script type="text/javascript" src="script.js" onerror="alert('Testing external text/javascript failed"></script>
 </html>
