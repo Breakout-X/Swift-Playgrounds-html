@@ -4,6 +4,7 @@ import WebKit
 //loads normal urls, but with scripts
 struct WebView: UIViewRepresentable {
     let request: URLRequest
+    let baseURL: URL?
     
     func makeUIView(context: Context) -> WKWebView  {
         let preferences = WKWebpagePreferences()
@@ -12,13 +13,24 @@ struct WebView: UIViewRepresentable {
         let configuration = WKWebViewConfiguration()
         configuration.defaultWebpagePreferences = preferences
         
+        // Add a script to set the base URL in your HTML file
+        let source = "var meta = document.createElement('meta');" +
+        "meta.name = 'base';" +
+        "meta.content = '\(baseURL?.absoluteString ?? "")';" +
+        "document.getElementsByTagName('head')[0].appendChild(meta);"
+        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        configuration.userContentController.addUserScript(script)
+        
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.uiDelegate = context.coordinator
         return webView
+        
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        if let baseURL = baseURL {
+            uiView.loadFileURL(request.url!, allowingReadAccessTo: baseURL)
+        } else {
             uiView.load(request)
         }
     }
