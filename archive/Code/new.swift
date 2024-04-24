@@ -1,23 +1,33 @@
+import SwiftUI
+
 struct ContentView: View {
     @State private var selectedTab = 0
-
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             // Tab 1
-            WebView(request: URLRequest(url: Bundle.main.url(forResource: "index", withExtension: "html")!))
-                .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("Tab 1")
-                }
-                .tag(0)
+            if let url = Bundle.main.url(forResource: "index", withExtension: "html") {
+                WebView(request: URLRequest(url: url), baseURL: url.deletingLastPathComponent())
+                    .tabItem {
+                        Image(systemName: "1.square.fill")
+                        Text("Tab 1")
+                    }
+                    .tag(0)
+            } else {
+                Text("Failed to load the URL");
+            }
             
             // Tab 2
-            WebView(request: URLRequest(url: URL(string: "https://breakout-x.github.io/Breakout-X/")!))
-                .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Tab 2")
-                }
-                .tag(1)
+            if let url = Bundle.main.url(forResource: "https://breakout-x.github.io/Breakout-X/newtab/iOS/", withExtension: "html") {
+                WebView(request: URLRequest(url: url), baseURL: url.deletingLastPathComponent())
+                    .tabItem {
+                        Image(systemName: "2.square.fill")
+                        Text("Tab 2")
+                    }
+                    .tag(1)
+            } else {
+                Text("Failed to load the URL");
+            }
         }
     }
 }
