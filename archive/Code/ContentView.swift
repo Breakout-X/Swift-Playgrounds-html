@@ -18,7 +18,7 @@ struct ContentView: View {
             }
             
             // Tab 2
-            if let url = Bundle.main.url(forResource: "https://breakout-x.github.io/Breakout-X/newtab/iOS/", withExtension: "html") {
+            if let url = URL(string: "https://breakout-x.github.io/Breakout-X/newtab/iOS/") {
                 WebView(request: URLRequest(url: url), baseURL: url.deletingLastPathComponent())
                     .tabItem {
                         Image(systemName: "2.square.fill")
@@ -28,6 +28,19 @@ struct ContentView: View {
             } else {
                 Text("Failed to load the URL");
             }
+            
+            // Tab 3
+            if let url = URL(string: "https://breakout-x.github.io/Breakout-X/newtab/iOS/") {
+                WebView(request: URLRequest(url: url), baseURL: url.deletingLastPathComponent())
+                    .tabItem {
+                        Image(systemName: "3.square.fill")
+                        Text("New Tab")
+                    }
+                    .tag(2)
+            } else {
+                Text("Failed to load the URL");
+            }
         }
     }
 }
+
