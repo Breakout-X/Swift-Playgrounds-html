@@ -12,4 +12,4 @@ To get the whole repository, you can go [to the main page](https://breakout-x.gi
 
 --------
 
-This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) for more information.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) for more information.
